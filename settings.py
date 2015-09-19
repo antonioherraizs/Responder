@@ -158,6 +158,7 @@ class Settings:
 		self.Upstream_Proxy  = options.Upstream_Proxy
 		self.AnalyzeMode     = options.Analyze
 		self.Verbose         = options.Verbose
+		self.Limit_Hashes     = options.Limit_Hashes
 		self.CommandLine     = str(sys.argv)
 
 		if self.HtmlToInject == None:

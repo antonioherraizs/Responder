@@ -23,7 +23,7 @@ from base64 import b64decode, b64encode
 from utils import *
 
 from packets import NTLM_Challenge
-from packets import IIS_Auth_401_Ans, IIS_Auth_Granted, IIS_NTLM_Challenge_Ans, IIS_Basic_401_Ans
+from packets import IIS_Auth_401_Ans, IIS_Auth_Granted, IIS_NTLM_Challenge_Ans, IIS_Basic_401_Ans, IIS_404_Ans
 from packets import WPADScript, ServeExeFile, ServeHtmlFile
 
 
@@ -226,6 +226,11 @@ class HTTP(BaseRequestHandler):
 
 	def handle(self):
 		try:
+			if settings.Config.Limit_Hashes and QueryDB() > 0:
+				print color('[*]', 2, 1), 'Skipping with a 404, we already have a hash. Clear the DB if you want more'
+				self.request.send(str(IIS_404_Ans()))
+				return
+
 			while True:
 				self.request.settimeout(1)
 				data = self.request.recv(8092)

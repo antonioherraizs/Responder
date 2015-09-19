@@ -194,6 +194,19 @@ def SaveToDb(result):
 		print color('[*]', 2, 1), 'Skipping previously captured hash for %s' % result['user']
 
 
+def QueryDB():
+
+	# Return number of entries in DB
+	if os.path.exists(settings.Config.DatabaseFile):
+		
+		cursor = sqlite3.connect(settings.Config.DatabaseFile)
+		res = cursor.execute("SELECT COUNT(*) AS count FROM responder")
+		(count,) = res.fetchone()
+		cursor.close()
+		
+		return count
+
+
 def Parse_IPV6_Addr(data):
 
 	if data[len(data)-4:len(data)][1] =="\x1c":

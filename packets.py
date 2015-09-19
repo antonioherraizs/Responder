@@ -213,6 +213,17 @@ class IIS_Auth_401_Ans(Packet):
 		("CRLF",          "\r\n"),                               
 	])
 
+class IIS_404_Ans(Packet):
+	fields = OrderedDict([
+		("Code",          "HTTP/1.1 404 Not Found\r\n"),
+		("ServerType",    "Server: Microsoft-IIS/6.0\r\n"),
+		("Date",          "Date: Wed, 12 Sep 2012 13:06:55 GMT\r\n"),
+		("Type",          "Content-Type: text/html\r\n"),
+		("PoweredBy",     "X-Powered-By: ASP.NET\r\n"),
+		("Len",           "Content-Length: 0\r\n"), 
+		("CRLF",          "\r\n"),                               
+	])
+
 class IIS_Auth_Granted(Packet):
 	fields = OrderedDict([
 		("Code",          "HTTP/1.1 200 OK\r\n"),
